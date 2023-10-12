@@ -227,6 +227,12 @@ if ( ! function_exists( 'hello_elementor_body_open' ) ) {
 	}
 }
 
-
 //
+function enqueue_custom_script() {
+    wp_enqueue_script('page-add-product-script', get_template_directory_uri() . '/custom-js/page-add-product-script.js', array('jquery'), '1.0', true);
+
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_custom_script', 99);
+
 require_once 'custom-elementor.php';

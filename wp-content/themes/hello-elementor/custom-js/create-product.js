@@ -43,70 +43,57 @@ jQuery(document).ready(function(jQuery) {
 
     elementor.hooks.addAction( 'panel/open_editor/widget', function( panel, model, view ) {
         console.log('panel/open_editor/widget');    
-        console.log(model);
-        console.log(view);
-        console.log(model.attributes.widgetType);
-
+        //console.log(model);
+        //console.log(view);
+        console.log('model.getSetting(\'product-id\'): ' +model.getSetting('product-id'));
         //model.setSetting('product-id', 'sample text');
         //&& !view.$el[0].classList.contains('elementor-widget-empty')
+        //view.remove();
+        console.log(createdProduct.get('id'));
         console.log(view.$el[0].classList.contains('elementor-widget-empty'));
         if(model.attributes.widgetType == 'widget_create_product' ){ 
-            if(createdProduct.get('id') != 0 && model.getSetting('product-id') == ''){
+            // there is a product, it's not dragged, and the product-id in the panel is null
+            if(createdProduct.get('id') != 0 && createdProduct.attributes.attributes.dragged == 0 && model.getSetting('product-id') == ''){
                 model.setSetting('product-id', createdProduct.get('id'));
+                console.log('product-id is setted to panel');
             } 
         }
 
     } );
 
-    elementor.hooks.addAction( 'panel/open_editor/widget/widget_create_product', function( panel, model, view ) {
-        console.log('hook panel/open_editor/widget/widget_create_product');
-        // console.log(panel);
-        // console.log(model);
-        // console.log(view);
-        // console.log('productCreating');
-        // console.log(productCreating);
-        // console.log('createdProduct from hooks');
-        // console.log(createdProduct);
+    // elementor.hooks.addAction( 'panel/open_editor/widget/widget_create_product', function( panel, model, view ) {
+    //     //console.log('hook panel/open_editor/widget/widget_create_product');
+    //     // console.log(panel);
+    //     // console.log(model);
+    //     // console.log(view);
+    //     // console.log('productCreating');
+    //     // console.log(productCreating);
+    //     // console.log('createdProduct from hooks');
+    //     // console.log(createdProduct);
 
-        // if(createdProduct.get('id') != 0){
-        //     console.log('Product created, now show it');
-        //     console.log(createdProduct.attributes.attributes.name);
-        //     console.log(createdProduct.attributes.attributes.price);
-        //     view.$el.html("\
-        //         <div class='product'>\
-        //             <h3>" + createdProduct.attributes.attributes.name + "</h3>\
-        //             <p>" + createdProduct.attributes.attributes.price + "</p>\
-        //         </div>\
-        //     ");
-        // } else{
-        //     console.log('Product has not created, now show model popup to create a new product');
-        //     var productCreating = new ProductModel();
-        //     var viewModel = new AddProductView({model:productCreating, view:view});
-        //     viewModel.render().showModal();
-        // }
-
-        
-        // alert( 'Action 2' );
-        // console.log(panel);
-        // console.log(model);
-        // console.log(view);
-        // window.addEventListener('elementor/frontend/init', () => {
-        //     elementorFrontend.on( 'components:init', () => { //wait for elementor pro to load
-        //         console.log('Components initalised');
-        //     } );
-        // })
-        // var $element = view.$el.find( 'elementor-widget-widget_create_product' );
-        
-        // if ( $element.length ) {
-        //     $element.click( function() {
-        //     alert( 'Some Message' );
-        //     } );
-        // }
-     } );
+    //     // if(createdProduct.get('id') != 0){
+    //     //     console.log('Product created, now show it');
+    //     //     console.log(createdProduct.attributes.attributes.name);
+    //     //     console.log(createdProduct.attributes.attributes.price);
+    //     //     view.$el.html("\
+    //     //         <div class='product'>\
+    //     //             <h3>" + createdProduct.attributes.attributes.name + "</h3>\
+    //     //             <p>" + createdProduct.attributes.attributes.price + "</p>\
+    //     //         </div>\
+    //     //     ");
+    //     // } else{
+    //     //     console.log('Product has not created, now show model popup to create a new product');
+    //     //     var productCreating = new ProductModel();
+    //     //     var viewModel = new AddProductView({model:productCreating, view:view});
+    //     //     viewModel.render().showModal();
+    //     // }
+    //  } );
 
     elementorFrontend.hooks.addAction( 'frontend/element_ready/widget', function( $scope ) {
         console.log('createdProduct from elementorFrontend hooks');
-        //console.log($scope);
+        // $scope.parent().remove();
+        // return;
+        console.log($scope);
 
         if($scope[0].classList.contains('elementor-widget-widget_create_product')){ 
             console.log(createdProduct);
@@ -126,7 +113,7 @@ jQuery(document).ready(function(jQuery) {
                     console.log('after set dragged')
                     console.log(createdProduct);
                 }
-            } else{
+            } else {
                 console.log('Product has not created, now show model popup to create a new product');
                 showCreateProductView();
             }
