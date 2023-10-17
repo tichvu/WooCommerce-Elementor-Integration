@@ -85,7 +85,6 @@ var createdProduct = new ProductModel();
 				
 				if( this.model.set( this.getCurrentFormValues()))
 				{
-					//_people.add( this.model);
                     // Start - Call Woocommerce api here to add new product
                     // Create a data object with product details
 
@@ -105,7 +104,6 @@ var createdProduct = new ProductModel();
                         data: data,
                         success: function(response) {
                             alert('Product created successfully!');
-                            // You can optionally redirect the user or perform other actions after product creation.
 							console.log('productID: ' + response.id);
 							self.model.set('id', response.id);
 							createdProduct.set(self.model);

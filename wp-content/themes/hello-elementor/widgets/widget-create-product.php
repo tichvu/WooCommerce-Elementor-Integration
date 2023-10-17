@@ -56,21 +56,6 @@ class Widget_Create_Product extends Widget_Base {
 			]
 		);
 
-        // $args = array(
-        //     'post_type'      => 'product',
-        //     'posts_per_page' => 10
-        // );
-
-        // $products = array();
-        // $loop = new WP_Query( $args );
-        // while ( $loop->have_posts() ) : $loop->the_post();
-        //     global $product;
-        //     $id = $product->get_id();
-        //     $products[$id] = get_the_title();
-        // endwhile;
-
-        // wp_reset_query();
-
 		$this->add_control(
 			'product-id',
 			[
@@ -79,30 +64,9 @@ class Widget_Create_Product extends Widget_Base {
 			]
 		);
 
-        // $this->add_control(
-		// 	'product',
-		// 	[
-		// 		'type' => \Elementor\Controls_Manager::SELECT,
-		// 		'label' => esc_html__( 'Choose product', 'textdomain' ),
-		// 		'options' => $products,
-		// 		'default' => 'no',
-		// 	]
-		// );
-
-
-        
 		 $this->end_controls_section();
 
 	}
-    // protected function render() {
-	// 	// $settings = $this->get_settings_for_display();
-	// 	// echo '<h3>' . $settings['title'] . '</h3>';
-    //     // echo '<h3>' . $settings['product'] . '</h3>';
-    //     // $product = wc_get_product($settings['product']);
-		
-		
-        
-	// }
 
 	// PHP render
 	
@@ -127,14 +91,6 @@ class Widget_Create_Product extends Widget_Base {
 	
 	public function content_template() {
 		return '';
-		/*
-		?>
-		<#
-		view.addInlineEditingAttributes( 'product-id', 'none' );
-		#>
-		<h2 {{{ view.getRenderAttributeString( 'product-id' ) }}}>{{{ settings.product-id }}}</h2>
-		<?php
-		*/
     }
 	
 	
